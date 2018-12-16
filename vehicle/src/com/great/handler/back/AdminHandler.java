@@ -33,7 +33,7 @@ import com.great.util.Result;
  * @author 
  *
  */
-@Controller
+@Controller("backAdmin")
 @RequestMapping("/back/admin")
 public class AdminHandler {
 	

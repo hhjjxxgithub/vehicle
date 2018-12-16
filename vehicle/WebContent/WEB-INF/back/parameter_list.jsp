@@ -156,9 +156,8 @@
 			<div class="app-content">
 				<section class="section">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Tables</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Data
-							Tables</li>
+						<li class="breadcrumb-item"><a href="#">系统管理</a></li>
+						<li class="breadcrumb-item active" aria-current="page">参数管理</li>
 					</ol>
 					<div class="row">
 						<div class="col-lg-12">
@@ -177,11 +176,9 @@
 											class="table table-striped table-bordered border-t0 text-nowrap w-100">
 											<thead>
 												<tr>
-													<th class="wd-15p">账户</th>
-													<th class="wd-15p">姓名</th>
-													<th class="wd-20p">手机号码</th>
-													<th class="wd-10p">驾校</th>
-													<th class="wd-15p">状态</th>
+													<th class="wd-15p">参数值</th>
+													<th class="wd-15p">参数名</th>
+													<th class="wd-15p">对应表</th>
 													<th class="wd-15p">操作</th>
 												</tr>
 											</thead>
@@ -211,7 +208,7 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">教练修改</h4>
+					<h4 class="modal-title" id="myModalLabel">参数修改</h4>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -220,38 +217,49 @@
 				<div class="modal-body" id="content" style="text-align: right">
 					<!--表单  -->
 					<form class="form-horizontal" id="form">
-						<input name="coachId" id="coachId" readonly="readonly" style="display: none">
+						<input name="parameterId" id="parameterId" readonly="readonly" style="display: none">
+						<input name="key" id="key" disabled readonly="readonly" style="display: none">
 						<div class="form-group row">
-							<label class="col-md-4 col-form-label">姓名</label>
+							<label  class="col-md-4 col-form-label">参数值</label>
 							<div class="col-md-4">
-								<input type="text" class="form-control" id="coachName" name="coachName" placeholder="Name"
-								datatype='s2-6' errormsg="用户名至少2个字符,最多6个字符!">
+								<input type="text" class="form-control" placeholder="Value" name="parameterState"
+								 datatype='/^[1-9][0-9]*$/' errormsg="请输入不为零的整数！" id="parameterState1">
 							</div>
 							<span class="Validform_checktip"></span>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-4 col-form-label">身份证</label>
+							<label  class="col-md-4 col-form-label">参数名</label>
 							<div class="col-md-4">
-								<input type="text" class="form-control" placeholder="Card"
-								id="coachCard" name="coachCard" datatype='s18-18' errormsg="请输入18位的身份证号码！">
+								<input type="text" class="form-control" placeholder="Name" name="parameterName"
+								 datatype='s1-5' errormsg="请输入1-5个字符！" id="parameterName">
 							</div>
 							<span class="Validform_checktip"></span>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-4 col-form-label">手机号码</label>
+							<label class="col-md-4 col-form-label">所属表</label>
 							<div class="col-md-4">
-								<input type="text" class="form-control" placeholder="Phone" id="coachPhone" 
-								name="coachPhone" datatype='m' errormsg="请输入11的手机号码！">
-							</div>
-							<span class="Validform_checktip"></span>
-						</div>
-						<div class="form-group row">
-							<label class="col-md-4 col-form-label">状态</label>
-							<div class="col-md-4">
-								<select class="form-control" name="coachState" id="coachState">
+								<select class="form-control" name="parameterMark" id="parameterMark1"
+								datatype='vali1' errormsg="该表下已经存在该参数值！">
+									<option value="car">car</option>
+									<option value="coach">coach</option>
+									<option value="dynamic">dynamic</option>
+									<option value="evaluate">evaluate</option>
+									<option value="exam">exam</option>
+									<option value="level">level</option>
+									<option value="menu">menu</option>
+									<option value="notice">notice</option>
+									<option value="parameter">parameter</option>
+									<option value="period">period</option>
+									<option value="role">role</option>
+									<option value="roleMenu">roleMenu</option>
+									<option value="school">school</option>
+									<option value="subject">subject</option>
+									<option value="user">user</option>
+									<option value="value">value</option>
 								</select>
 							</div>
 							<span class="Validform_checktip"></span>
+						</div>
 						</div>
 						<div class="modal-footer">
 							<button class="btn btn-primary">保存</button>
@@ -269,7 +277,7 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">教练新增</h4>
+					<h4 class="modal-title" id="myModalLabel">参数新增</h4>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -279,52 +287,43 @@
 					<!--表单  -->
 					<form class="form-horizontal" id="addform">
 						<div class="form-group row">
-							<label  class="col-md-4 col-form-label">账户</label>
+							<label  class="col-md-4 col-form-label">参数值</label>
 							<div class="col-md-4">
-								<input type="text" class="form-control" placeholder="Account" name="coachAccount"
-								 datatype='s5-10' errormsg="账户至少5个字符,最多10个字符!"
-								 ajaxurl='${pageContext.request.contextPath}/back/coach/accountExist.handler' sucmsg="账户可以使用！">
+								<input type="text" class="form-control" placeholder="Value" name="parameterState"
+								 datatype='/^[1-9][0-9]*$/' errormsg="请输入不为零的整数！" id="parameterState2">
 							</div>
 							<span class="Validform_checktip"></span>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-4 col-form-label">密码</label>
+							<label  class="col-md-4 col-form-label">参数名</label>
 							<div class="col-md-4">
-								<input type="password" class="form-control" name="coachPwd"
-								datatype='s5-10' errormsg="密码至少5个字符,最多10个字符！">
+								<input type="text" class="form-control" placeholder="Name" name="parameterName"
+								 datatype='s1-5' errormsg="请输入1-5个字符！">
 							</div>
 							<span class="Validform_checktip"></span>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-4 col-form-label">确认密码</label>
+							<label class="col-md-4 col-form-label">所属表</label>
 							<div class="col-md-4">
-								<input type="password" class="form-control" 
-								datatype='s5-10' errormsg="保持两个密码一致" recheck='coachPwd'>
-							</div>
-							<span class="Validform_checktip"></span>
-						</div>
-						<div class="form-group row">
-							<label class="col-md-4 col-form-label">姓名</label>
-							<div class="col-md-4">
-								<input type="text" class="form-control" placeholder="Name" name="coachName"
-								datatype='s2-6' errormsg="用户名至少2个字符,最多6个字符!">
-							</div>
-							<span class="Validform_checktip"></span>
-						</div>
-						<div class="form-group row">
-							<label class="col-md-4 col-form-label">身份证</label>
-							<div class="col-md-4">
-								<input type="text" class="form-control" placeholder="Card" name="coachCard"
-								datatype='s18-18' errormsg="请输入18位的身份证号码！"
-								ajaxurl='${pageContext.request.contextPath}/back/coach/cardExist.handler' sucmsg="身份证可以使用！">
-							</div>
-							<span class="Validform_checktip"></span>
-						</div>
-						<div class="form-group row">
-							<label class="col-md-4 col-form-label">手机号码</label>
-							<div class="col-md-4">
-								<input type="text" class="form-control" placeholder="Phone" name="coachPhone"
-								datatype='m' errormsg="请输入11位的手机号码！">
+								<select class="form-control" name="parameterMark" id="parameterMark2"
+								datatype='vali2' errormsg="该表下已经存在该参数值！">
+									<option value="car">car</option>
+									<option value="coach">coach</option>
+									<option value="dynamic">dynamic</option>
+									<option value="evaluate">evaluate</option>
+									<option value="exam">exam</option>
+									<option value="level">level</option>
+									<option value="menu">menu</option>
+									<option value="notice">notice</option>
+									<option value="parameter">parameter</option>
+									<option value="period">period</option>
+									<option value="role">role</option>
+									<option value="roleMenu">roleMenu</option>
+									<option value="school">school</option>
+									<option value="subject">subject</option>
+									<option value="user">user</option>
+									<option value="value">value</option>
+								</select>
 							</div>
 							<span class="Validform_checktip"></span>
 						</div>
@@ -383,8 +382,165 @@
 
 	<script>
 		var path = "${pageContext.request.contextPath}";
-		var param = ${requestScope.param};
+		var table;
+		$(function(e) {
+			/*表格插件初始化 */
+			table = $('#example').DataTable({
+				ajax:{
+					url:path+"/back/parameter/parameterList.handler",
+					dataSrc: ""
+				},
+				columns:[
+					{data:'parameterState'},
+					{data:'parameterName'},
+					{data:'parameterMark'},
+					{
+						data:null,
+						"render": function ( data, type, full, meta ) {
+							return "<button type='button' class='btn btn-default'"+ 
+								"onClick=modify("+full.parameterId+",'"+full.parameterState+
+								","+full.parameterMark+"')>修改</button>"+
+								"<button type='button' onClick='del("+full.parameterId+")'"+ 
+								"class='btn btn-default'>删除</button>";
+						}
+					}
+				]
+			})
+			/*修改验证插件初始化 */
+			$("#form").Validform({
+			    tiptype: 2,
+			    ajaxPost: true,
+			    datatype:{
+					'vali1':function(gets,obj,curform,regxp){
+						return exist('1');
+					}
+				},
+			    beforeSubmit: function (curform) {
+			        $.ajax({
+			            type: 'post',
+			            url: path+"/back/parameter/update.handler",
+			            contentType: 'application/json',
+			            data: JSON.stringify($("#form").serializeJSON()),
+			            success: function (data) {
+			                if (data != 'y') {
+			                    window.alert("修改成功");
+			                    $("#myModal").modal("hide");
+			                    table.ajax.reload();
+			                    table.draw(false);
+			                } else {
+			                    window.alert("修改失败");
+			                }
+			            }
+			        })
+			        return false;
+			    }
+			});
+			/*添加验证插件初始化 */
+			$("#addform").Validform({
+			    tiptype: 2,
+			    ajaxPost: true,
+				datatype:{
+					'vali2':function(gets,obj,curform,regxp){
+						return exist('2');
+					}
+				},
+			    beforeSubmit: function (curform) {
+			        $.ajax({
+			            type: 'post',
+			            url: path+"/back/parameter/add.handler",
+			            contentType: 'application/json',
+			            data: JSON.stringify($("#addform").serializeJSON()),
+			            success: function (data) {
+			                if (data != 'y') {
+			                    window.alert("新增成功");
+			                    $("#addModal").modal("hide");
+			                    table.ajax.reload();
+			                    table.draw(false);
+			                } else {
+			                    window.alert("新增失败");
+			                }
+			            }
+			        })
+			        return false;
+			    }
+			});
+		})
+		/* 存在验证 */
+		function exist(i){
+			var reg=/^[1-9][0-9]*$/;
+			if(!reg.test($("#parameterState"+i).val())){return false}	
+			if(i == '1'){
+				var now = $("#parameterState"+i).val()+","+$("#parameterMark"+i).val();
+				if(now == $("#key").val()){return true}
+			}
+			var flag = false;
+			$.ajax({
+	            type: 'post',
+	            async:false,
+	            url: path+"/back/parameter/exist.handler",
+	            data: {parameterState:$("#parameterState"+i).val(),
+	            	parameterMark:$("#parameterMark"+i).val()
+	            },
+	            success: function (data) {
+	            	flag = data.status == 'y'?true:false;
+	            }
+	        })
+	        return flag;
+		}
+		/* 进入修改页面前 */
+		function modify(id,key) {
+			$.ajax({
+				 url :path+"/back/parameter/getById.handler",
+			     async : true,
+			     type : "POST",
+			     data : {parameterId:id},
+			     dataType:'json',
+			     success :function(data){
+					if(data.status == 'y'){
+						show(data.info);
+						$("#key").val(key);
+					}
+			     }
+			})
+		}
+		/* 数据填充并显示模态框*/
+		function show(data){
+			$("#parameterId").val(data.parameterId);
+			$("#parameterState1").val(data.parameterState);
+			$("#parameterName").val(data.parameterName);
+			$($("#parameterMark1 option[value='"+data.parameterMark+"']")[0]).attr('selected','true');
+			$("#myModal").modal('show');
+		}
+		/* 删除 */
+		function del(id){
+			var flag = window.confirm("确定删除？");
+			if(flag){
+				$.ajax({
+		            type: 'post',
+		            url: path+"/back/parameter/delete.handler",
+		            data: {parameterId:id},
+		            success: function (data) {
+		                if (data != 'y') {
+		                    window.alert("删除成功");
+		                    table.ajax.reload();
+		                    table.draw(false);
+		                } else {
+		                    window.alert("删除失败");
+		                }
+		            }
+		        })
+			}
+		}
+		/*关闭模态框清空数据*/
+		$("#myModal").on('hidden.bs.modal', function () {
+			$("#form").Validform().resetForm();
+			$(".Validform_checktip>.Validform_checktip").html("");
+		});
+		$("#addModal").on('hidden.bs.modal', function () {
+			$("#addform").Validform().resetForm();
+			$(".Validform_checktip>.Validform_checktip").html("");
+		});
 	</script>
-	<script src="${pageContext.request.contextPath}/js/back/coach_list.js"></script>
+	<%-- <script src="${pageContext.request.contextPath}/js/back/paramter_list.js"></script> --%>
 </body>
 </html>

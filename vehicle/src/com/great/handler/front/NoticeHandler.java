@@ -20,7 +20,7 @@ import com.great.service.NoticeService;
  *
  */
 import com.great.util.Result;
-@Controller
+@Controller("frontNotic")
 @RequestMapping("/front/notice")
 public class NoticeHandler {
 	@Resource

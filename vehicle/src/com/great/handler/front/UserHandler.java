@@ -28,7 +28,7 @@ import com.great.util.Result;
  * @author 
  *
  */
-@Controller
+@Controller("frontUser")
 @RequestMapping("/front/user")
 public class UserHandler {
 	@Resource

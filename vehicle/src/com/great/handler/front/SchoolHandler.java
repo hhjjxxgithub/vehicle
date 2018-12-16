@@ -1,4 +1,4 @@
-package com.great.handler.back;
+package com.great.handler.front;
 
 import javax.annotation.Resource;
 
@@ -12,7 +12,7 @@ import com.great.bean.School;
 import com.great.service.SchoolService;
 import com.great.util.Result;
 
-@Controller
+@Controller("frontSchool")
 @RequestMapping("/front/school")
 public class SchoolHandler {
 	@Resource

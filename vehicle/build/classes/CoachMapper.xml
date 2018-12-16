@@ -13,14 +13,49 @@
     <result column="COACH_PHONE" jdbcType="VARCHAR" property="coachPhone" />
     <result column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
   </resultMap>
+  <!-- 登录 -->
   <select id="login" parameterType="map" resultMap="BaseResultMap">
   	select COACH_ID,COACH_ACCOUNT,COACH_NAME,SCHOOL_ID,COACH_STATE,COACH_DATE,COACH_CARD
   	COACH_PHONE,ROLE_ID from t_coach where COACH_ACCOUNT = #{account} and 
   	COACH_PWD = #{pwd} and COACH_STATE != 99
   </select>
+  <!-- 查询全部 -->
   <select id="queryAll" resultType="map">
-  	select COACH_ID,COACH_ACCOUNT,COACH_NAME,SCHOOL_NAME,p.PARAMETER_NAME,COACH_CARD,
-  	COACH_PHONE from t_coach c,t_school s,t_parameter p where c.COACH_STATE != 99 and 
-  	c.COACH_STATE = p.PARAMETER_ID and c.SCHOOL_ID = s.SCHOOL_ID 
+  	select COACH_ID,COACH_ACCOUNT,COACH_NAME,SCHOOL_NAME,COACH_CARD,COACH_STATE,
+  	COACH_PHONE from t_coach c,t_school s where c.COACH_STATE != 99 
+  	and c.SCHOOL_ID = s.SCHOOL_ID 
   </select>
+  <!-- 通过id获取 -->
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+    select COACH_ID,COACH_NAME,COACH_CARD,COACH_PHONE,SCHOOL_ID,COACH_STATE from t_coach 
+    where COACH_ID = #{coachId}
+  </select>
+  <!--账户是否存在 -->
+  <select id="accountExist" resultType="Integer">
+  	select count(0) from t_coach where COACH_ACCOUNT = #{coachAccount} and COACH_STATE != 99
+  </select>
+  <!--身份证号码是否存在 -->
+  <select id="cardExist" resultType="Integer">
+  	select count(0) from t_coach where COACH_CARD = #{coachCard} and COACH_STATE != 99
+  </select>
+  <!-- 添加 -->
+  <insert id="add" parameterType="com.great.bean.Coach">
+  	insert into t_coach (COACH_ID,COACH_ACCOUNT,COACH_NAME,COACH_PHONE,COACH_CARD,COACH_PWD)
+  	values (seq_t_coach.nextval,#{coachAccount},#{coachName},#{coachPhone},#{coachCard},#{coachPwd})
+  </insert>
+  <!-- 修改 -->
+  <update id="update" parameterType="com.great.bean.Coach">
+  	update t_coach 
+  	<set>
+  		<if test="coachName != null ">COACH_NAME = #{coachName},</if>
+  		<if test="coachPhone != null ">COACH_PHONE = #{coachPhone},</if>
+  		<if test="coachCard != null ">COACH_CARD = #{coachCard},</if>
+  		<if test="coachState != null ">COACH_STATE = #{coachState},</if>
+  	</set>
+  	where COACH_ID = #{coachId}
+  </update>
+  <!-- 删除 -->
+  <update id="delete" parameterType="Integer">
+  	update t_coach set COACH_STATE = 99 where COACH_ID = #{coachId} 
+  </update>
 </mapper>

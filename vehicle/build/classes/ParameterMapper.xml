@@ -8,4 +8,41 @@
     <result column="PARAMETER_DATE" jdbcType="TIMESTAMP" property="parameterDate" />
     <result column="PARAMETER_MARK" jdbcType="VARCHAR" property="parameterMark" />
   </resultMap>
+  <!-- 查询某个表的参数 -->
+  <select id="queryAll" parameterType="String" resultMap="BaseResultMap">
+      select PARAMETER_NAME,PARAMETER_STATE from t_parameter where PARAMETER_MARK=#{mark}
+      and PARAMETER_STATE != 0
+  </select>
+  <!-- 查询所有参数 -->
+  <select id="all" resultMap="BaseResultMap">
+      select PARAMETER_ID,PARAMETER_NAME,PARAMETER_STATE,PARAMETER_MARK from t_parameter where PARAMETER_STATE != 0 
+  </select>
+  <!-- 添加-->
+  <insert id="add" parameterType="com.great.bean.Parameter">
+  	insert into t_parameter (PARAMETER_ID,PARAMETER_STATE,PARAMETER_NAME,PARAMETER_MARK)
+  	values (seq_t_parameter.nextval,#{parameterState},#{parameterName},#{parameterMark})
+  </insert>
+  <!-- 是否存在 -->
+  <select id="exist" parameterType="com.great.bean.Parameter" resultType="int">
+  	select count(0) from t_parameter where PARAMETER_STATE = #{parameterState}
+  	and PARAMETER_MARK = #{parameterMark} and PARAMETER_STATE != 0
+  </select>
+  <!-- 修改 -->
+  <update id="update" parameterType="com.great.bean.Parameter" >
+  	update t_parameter 
+  	<set>
+  		<if test="parameterState != null">PARAMETER_STATE = #{parameterState},</if>
+  		<if test="parameterName != null">PARAMETER_NAME = #{parameterName},</if>
+  		<if test="parameterMark != null">PARAMETER_MARK = #{parameterMark},</if>
+  	</set>
+  	where PARAMETER_ID = #{parameterId}
+  </update>
+  <!-- 删除 -->
+  <update id="delete" parameterType="Integer">
+  	update t_parameter set PARAMETER_STATE = 0 where PARAMETER_ID = #{parameterId}
+  </update>
+  <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
+  	select PARAMETER_ID,PARAMETER_NAME,PARAMETER_STATE,PARAMETER_MARK from t_parameter 
+  	where PARAMETER_ID = #{parameterId}
+  </select>
 </mapper>
