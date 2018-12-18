@@ -18,7 +18,16 @@
 					{data:'COACH_ACCOUNT'},
 					{data:'COACH_NAME'},
 					{data:'COACH_PHONE'},
-					{data:'SCHOOL_NAME'},
+					{
+						data:'SCHOOL_NAME',
+						"render": function ( data, type, full, meta ) {
+							if(data != null){
+								return '<span>'+data+"</span>";
+							}else{
+								return "<span>无驾校</span>";
+							}
+						}
+					},
 					{
 						data:'COACH_STATE',
 						"render": function ( data, type, full, meta ) {
@@ -45,9 +54,10 @@
 			            type: 'post',
 			            url: path+"/back/coach/update.handler",
 			            contentType: 'application/json',
+			            dataType:"json",
 			            data: JSON.stringify($("#form").serializeJSON()),
 			            success: function (data) {
-			                if (data != 'y') {
+			                if (data.status = 'y') {
 			                    window.alert("修改成功");
 			                    $("#myModal").modal("hide");
 			                    table.ajax.reload();
@@ -70,9 +80,10 @@
 			            type: 'post',
 			            url: path+"/back/coach/add.handler",
 			            contentType: 'application/json',
+			            dataType:"json",
 			            data: JSON.stringify($("#addform").serializeJSON()),
 			            success: function (data) {
-			                if (data != 'y') {
+			                if (data.status = 'y') {
 			                    window.alert("新增成功");
 			                    $("#addModal").modal("hide");
 			                    table.ajax.reload();
@@ -129,8 +140,9 @@
 		            type: 'post',
 		            url: path+"/back/coach/delete.handler",
 		            data: {coachId:id},
+		            dataType:"json",
 		            success: function (data) {
-		                if (data != 'y') {
+		                if (data.status == 'y') {
 		                    window.alert("删除成功");
 		                    table.ajax.reload();
 		                    table.draw(false);

@@ -110,34 +110,46 @@
 				<div class="modal-body" id="content" style="text-align: right">
 					<!--表单  -->
 					<form class="form-horizontal" id="form">
-						<input name="parameterId" id="parameterId" readonly="readonly" style="display: none">
-						<input name="key" id="key" disabled readonly="readonly" style="display: none">
+						<input name="menuId" id="menuId" readonly="readonly" style="display: none">
 						<div class="form-group row">
-							<label  class="col-md-4 col-form-label">参数值</label>
+							<label  class="col-md-4 col-form-label">菜单名</label>
 							<div class="col-md-4">
-								<input type="text" class="form-control" placeholder="Value" name="parameterState"
-								 datatype='/^[1-9][0-9]*$/' errormsg="请输入不为零的整数！" id="parameterState1">
+								<input type="text" class="form-control" placeholder="Name" name="menuName"
+								 datatype='*1-10' errormsg="请输入1-10个字符的菜单名！" id="menuName">
 							</div>
 							<span class="Validform_checktip"></span>
 						</div>
 						<div class="form-group row">
-							<label  class="col-md-4 col-form-label">参数名</label>
+							<label  class="col-md-4 col-form-label">链接</label>
 							<div class="col-md-4">
-								<input type="text" class="form-control" placeholder="Name" name="parameterName"
-								 datatype='s1-5' errormsg="请输入1-5个字符！" id="parameterName">
+								<input type="text" class="form-control" placeholder="Link" name="menuLink"
+								id="menuLink" datatype='s1-50' errormsg="请输入1-50个字符的菜单链接！">
 							</div>
 							<span class="Validform_checktip"></span>
 						</div>
 						<div class="form-group row">
-							<label class="col-md-4 col-form-label">所属表</label>
+							<label  class="col-md-4 col-form-label">排序</label>
 							<div class="col-md-4">
-								<select class="form-control" name="parameterMark" id="parameterMark1"
-								datatype='vali1' errormsg="该表下已经存在该参数值！">
-									<option value="car">car</option>
+								<input type="text" class="form-control" placeholder="Index" name="menuIndex"
+								 datatype='/^[1-9][0-9]*$/' errormsg="请输入不为零的排序号！" id="menuIndex">
+							</div>
+							<span class="Validform_checktip"></span>
+						</div>
+						<div class="form-group row">
+							<label class="col-md-4 col-form-label">父级菜单</label>
+							<div class="col-md-4">
+								<select class="form-control" name="menuParent" id="menuParent1">
 								</select>
 							</div>
 							<span class="Validform_checktip"></span>
 						</div>
+						<div class="form-group row">
+							<label class="col-md-4 col-form-label">状态</label>
+							<div class="col-md-4">
+								<select class="form-control" name="menuState" id="menuState">
+								</select>
+							</div>
+							<span class="Validform_checktip"></span>
 						</div>
 						<div class="modal-footer">
 							<button class="btn btn-primary">保存</button>
@@ -168,21 +180,22 @@
 							<label  class="col-md-4 col-form-label">菜单名</label>
 							<div class="col-md-4">
 								<input type="text" class="form-control" placeholder="Name" name="menuName"
-								 datatype='*1-10' errormsg="请输入1-10个字符的菜单名！">
+								 datatype='s1-10' errormsg="请输入1-10个字符的菜单名！">
 							</div>
 							<span class="Validform_checktip"></span>
 						</div>
 						<div class="form-group row">
 							<label  class="col-md-4 col-form-label">链接</label>
 							<div class="col-md-4">
-								<input type="text" class="form-control" placeholder="Link" name="menuLink">
+								<input type="text" class="form-control" placeholder="Link" 
+								name="menuLink" datatype='s1-50' errormsg="请输入1-50个字符的菜单链接！">
 							</div>
 							<span class="Validform_checktip"></span>
 						</div>
 						<div class="form-group row">
 							<label  class="col-md-4 col-form-label">排序</label>
 							<div class="col-md-4">
-								<input type="text" class="form-control" placeholder="Index" name=""
+								<input type="text" class="form-control" placeholder="Index" name="menuIndex"
 								 datatype='/^[1-9][0-9]*$/' errormsg="请输入不为零的排序号！">
 							</div>
 							<span class="Validform_checktip"></span>
@@ -190,9 +203,7 @@
 						<div class="form-group row">
 							<label class="col-md-4 col-form-label">父级菜单</label>
 							<div class="col-md-4">
-								<select class="form-control" name="parameterMark" id="parameterMark2"
-								datatype='vali2' errormsg="该表下已经存在该参数值！">
-									<option value="car">car</option>
+								<select class="form-control" name="menuParent" id="menuParent2">
 								</select>
 							</div>
 							<span class="Validform_checktip"></span>
@@ -255,6 +266,11 @@
 		var param = ${requestScope.param};
 		var table;
 		$(function(e) {
+			/* 数据初始化 */
+			$("#menuState").append(
+				$("<option value='1'>"+param[1]+"</option>"+
+				  "<option value='2'>"+param[2]+"</option>")
+			);
 			/*表格插件初始化 */
 			table = $('#example').DataTable({
 				ajax:{
@@ -263,8 +279,26 @@
 				},
 				columns:[
 					{data:'MENU_NAME'},
-					{data:'MENU_LINK'},
-					{data:'PARENT_NAME'},
+					{
+						data:'MENU_LINK',
+						"render": function ( data, type, full, meta ) {
+							if(data != null){
+								return '<span>'+data+"</span>";
+							}else{
+								return "<span>无</span>";
+							}
+						}
+					},
+					{
+						data:'PARENT_NAME',
+						"render": function ( data, type, full, meta ) {
+							if(data != null){
+								return '<span>'+data+"</span>";
+							}else{
+								return "<span>无</span>";
+							}
+						}
+					},
 					{data:'MENU_INDEX'},
 					{
 						data:'MENU_STATE',
@@ -290,11 +324,12 @@
 			    beforeSubmit: function (curform) {
 			        $.ajax({
 			            type: 'post',
-			            url: path+"/back/coach/update.handler",
+			            url: path+"/back/menu/update.handler",
 			            contentType: 'application/json',
+			            dataType:"json",
 			            data: JSON.stringify($("#form").serializeJSON()),
 			            success: function (data) {
-			                if (data != 'y') {
+			                if (data.status = 'y') {
 			                    window.alert("修改成功");
 			                    $("#myModal").modal("hide");
 			                    table.ajax.reload();
@@ -315,11 +350,12 @@
 			    beforeSubmit: function (curform) {
 			        $.ajax({
 			            type: 'post',
-			            url: path+"/back/coach/add.handler",
+			            url: path+"/back/menu/add.handler",
 			            contentType: 'application/json',
+			            dataType:"json",
 			            data: JSON.stringify($("#addform").serializeJSON()),
 			            success: function (data) {
-			                if (data != 'y') {
+			                if (data.status = 'y') {
 			                    window.alert("新增成功");
 			                    $("#addModal").modal("hide");
 			                    table.ajax.reload();
@@ -332,8 +368,88 @@
 			        return false;
 			    }
 			});
-			
 		});
+		/* 进入修改页面前 */
+		function modify(id,key) {
+			$.ajax({
+				 url :path+"/back/menu/getById.handler",
+			     async : true,
+			     type : "POST",
+			     data : {menuId:id},
+			     dataType:'json',
+			     success :function(data){
+					if(data.status == 'y'){
+						show(data.info);
+					}
+			     }
+			})
+		}
+		/* 数据填充并显示模态框*/
+		function show(data){
+			getParent('1');
+			$("#menuId").val(data.menuId);
+			$("#menuLink").val(data.menuLink);
+			$("#menuName").val(data.menuName);
+			$("#menuIndex").val(data.menuIndex);
+			$($("#menuState option[value='"+data.menuState+"']")[0]).attr('selected','true');
+			$($("#menuParent1 option[value='"+data.menuParent+"']")[0]).attr('selected','true');
+			$("#myModal").modal('show');
+		}
+		/*关闭模态框清空数据*/
+		$("#myModal").on('hidden.bs.modal', function () {
+			$("#form").Validform().resetForm();
+			$(".Validform_checktip>.Validform_checktip").html("");
+		});
+		$("#addModal").on('hidden.bs.modal', function () {
+			$("#addform").Validform().resetForm();
+			$(".Validform_checktip>.Validform_checktip").html("");
+		});
+		/* 显示之前获取父类菜单 */
+		$("#addModal").on('show.bs.modal', function () {
+			getParent('2');
+		});
+		/* 获取所有父类菜单 */
+		function getParent(i){
+			var index = i;
+			$.ajax({
+	            type: 'post',
+	            async:false,
+	            url: path+"/back/menu/getParent.handler",
+	            dataType:"json",
+	            success: function (data) {
+	                if (data.status == 'y') {
+	                	$("#menuParent"+index).empty();
+	                	$("#menuParent"+index).append($("<option value='0'></option>"));
+	                	for(var i=0;i<data.info.length;i++){
+	                		var menu = data.info[i];
+	                		var option = "<option value='"+menu.menuId+"'>"+menu.menuName+"</option>"	
+		                	$("#menuParent"+index).append($(option));
+	                	}
+	                }
+	            }
+	        })
+		}
+		/* 删除 */
+		function del(id){
+			var flag = window.confirm("确定删除？");
+			if(flag){
+				$.ajax({
+		            type: 'post',
+		            url: path+"/back/menu/delete.handler",
+		            data: {menuId:id},
+		            dataType:"json",
+		            success: function (data) {
+		                if (data.status == 'y') {
+		                    window.alert("删除成功");
+		                    table.ajax.reload();
+		                    table.draw(false);
+		                } else {
+		                    window.alert("删除失败");
+		                }
+		            }
+		        })
+			}
+		}
 	</script>
 <%-- 	<script src="${pageContext.request.contextPath}/js/back/parameter_list.js"></script> --%>
 </body>

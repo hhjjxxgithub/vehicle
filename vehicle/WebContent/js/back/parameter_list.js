@@ -39,9 +39,10 @@
 			            type: 'post',
 			            url: path+"/back/parameter/update.handler",
 			            contentType: 'application/json',
+			            dataType:"json",
 			            data: JSON.stringify($("#form").serializeJSON()),
 			            success: function (data) {
-			                if (data != 'y') {
+			                if (data.status = 'y') {
 			                    window.alert("修改成功");
 			                    $("#myModal").modal("hide");
 			                    table.ajax.reload();
@@ -68,9 +69,10 @@
 			            type: 'post',
 			            url: path+"/back/parameter/add.handler",
 			            contentType: 'application/json',
+			            dataType:"json",
 			            data: JSON.stringify($("#addform").serializeJSON()),
 			            success: function (data) {
-			                if (data != 'y') {
+			                if (data.status = 'y') {
 			                    window.alert("新增成功");
 			                    $("#addModal").modal("hide");
 			                    table.ajax.reload();
@@ -138,8 +140,9 @@
 		            type: 'post',
 		            url: path+"/back/parameter/delete.handler",
 		            data: {parameterId:id},
+		            dataType:"json",
 		            success: function (data) {
-		                if (data != 'y') {
+		                if (data.status == 'y') {
 		                    window.alert("删除成功");
 		                    table.ajax.reload();
 		                    table.draw(false);

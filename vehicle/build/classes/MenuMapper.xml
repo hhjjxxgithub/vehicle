@@ -12,8 +12,8 @@
   </resultMap>
   <!-- 查询全部 -->
   <select id="queryAll" resultType="map">
-  	select m1.MENU_ID,m1.MENU_NAME,m1.MENU_PARENT,decode(m1.MENU_LINK,null,' ',m1.MENU_LINK) MENU_LINK,
- 	m1.MENU_INDEX,m1.MENU_STATE,decode(m2.MENU_NAME,null,' ',m2.MENU_NAME) PARENT_NAME 
+  	select m1.MENU_ID,m1.MENU_NAME,m1.MENU_PARENT,m1.MENU_LINK,
+ 	m1.MENU_INDEX,m1.MENU_STATE,m2.MENU_NAME PARENT_NAME 
   	from t_menu m1 left join t_menu m2 on m1.MENU_PARENT = m2.MENU_ID 
   	where m1.MENU_STATE != 0 order by m1.MENU_ID desc
   </select>
@@ -31,7 +31,7 @@
   </select> 
     <!-- 查询所有一级菜单 -->
   <select id="getParent"  resultMap="BaseResultMap">
-  	select MENU_ID,MENU_NAME from t_menu where MENU_STATE != 0 and MENU_STATE != 2 
+  	select MENU_ID,MENU_NAME from t_menu where MENU_PARENT = 0 and MENU_STATE != 0 and MENU_STATE != 2 
   </select>
   <!-- 通过ID获取 -->
   <select id="getById" parameterType="Integer" resultMap="BaseResultMap">
@@ -46,7 +46,8 @@
   <!-- 修改 -->
   <update id="update" parameterType="com.great.bean.Menu">
   	update t_menu set MENU_NAME = #{menuName},MENU_PARENT=#{menuParent},
-  	MENU_LINK = #{menuLink},MENU_INDEX = #{menuIndex} where MENU_ID = #{menuId}
+  	MENU_LINK = #{menuLink},MENU_INDEX = #{menuIndex},MENU_STATE = #{menuState}
+  	where MENU_ID = #{menuId}
   </update>
   <!-- 删除 -->
   <update id="delete" parameterType="Integer">
