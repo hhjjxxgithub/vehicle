@@ -9,4 +9,9 @@
     <result column="SCHOOL_ID" jdbcType="DECIMAL" property="schoolId" />
     <result column="COACH_ID" jdbcType="DECIMAL" property="coachId" />
   </resultMap>
+  <select id="carCount" parameterType="com.great.bean.School"
+		resultType="int">
+		select count(0) from t_school where
+		SCHOOL_ID=#{schoolId}
+	</select>
 </mapper>

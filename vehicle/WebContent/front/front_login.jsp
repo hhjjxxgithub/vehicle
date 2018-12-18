@@ -59,7 +59,7 @@ $("#reg").Validform({
 				success:function(data){
 					if(data.status == 'y'){
 						window.alert(data.info);
-						window.top.location.href="${pageContext.request.contextPath}/go/front/index.handler";
+						window.top.location.href="${pageContext.request.contextPath}/front/index.jsp";
 					}else {
 						window.alert(data.info);
 					}

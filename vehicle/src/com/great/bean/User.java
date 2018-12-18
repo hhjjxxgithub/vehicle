@@ -15,7 +15,7 @@ public class User {
 
     private String userCard;
 
-    private Integer userLevel;
+    private Integer levelId;
 
     private Integer coachId;
 
@@ -75,12 +75,12 @@ public class User {
         this.userCard = userCard == null ? null : userCard.trim();
     }
 
-    public Integer getUserLevel() {
-        return userLevel;
+    public Integer getLevelId() {
+        return levelId;
     }
 
-    public void setUserLevel(Integer userLevel) {
-        this.userLevel = userLevel;
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
     }
 
     public Integer getCoachId() {

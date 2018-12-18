@@ -47,8 +47,8 @@
 						<a href="profile.html" class="dropdown-item has-icon">
 							<i class="ion ion-gear-a"></i> Settings
 						</a>
-						<a href="#" class="dropdown-item has-icon">
-							<i class="ion-ios-redo"></i> Logout
+						<a class="dropdown-item has-icon" href="###" onclick="exit()">
+							<i class="ion-ios-redo"></i> 退出
 						</a>
 					</div>
 				</li>
@@ -58,16 +58,37 @@
 </header>
  <nav class="nav left">
     <ul class="left" id="navList"><li><a href="${pageContext.request.contextPath}/front/head.jsp" target="right">首页</a></li>
+        <c:if test="${sessionScope.login.roleId!=u}">
         <li><a href="###">个人菜单</a><div class="navCon">
             <ul class="navConUl">
-                <li><a href="###"><p><img src="${pageContext.request.contextPath}/img/perso_02.png"> </p>
-                    <p>户籍办理 </p></a>
+            <c:choose>
+           <c:when test="${sessionScope.login.roleId==2}">
+                <li><a href="${pageContext.request.contextPath}/front/school/examSchedule.handler" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png"> </p>
+                    <p>学员考试安排 </p></a>
                 </li>
+           </c:when>
+            <c:when test="${sessionScope.login.roleId==4}">
+                <li><a href="${pageContext.request.contextPath}/front/control/schoolList.handler" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png"> </p>
+                    <p>驾校开通审核 </p></a>
+                </li>
+                 <li><a href="${pageContext.request.contextPath}/front/control/schoolPunishList.handler" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png"> </p>
+                    <p>驾校违规处罚 </p></a>
+                </li>
+            </c:when>
+            <c:when test="${sessionScope.login.roleId==1}">
+            <li><a href="${pageContext.request.contextPath}/front/subject/subjectOne.handler?now=1" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png"> </p>
+                    <p>科目一学习 </p></a>
+                </li>
+            </c:when>
+            </c:choose>
             </ul>
         </div>
+            </c:if>
         <li><a href="law.html">行业动态</a></li>
         <li><a href="${pageContext.request.contextPath}/front/user_list.jsp" target="right">通知公告</a> </li>
+        <c:if test="${sessionScope.login.roleId!=4 && sessionScope.login.roleId!=1}">
         <li><a href="${pageContext.request.contextPath}/front/school_apply.jsp" target="right">驾校开通申请</a> </li>
+   		</c:if>
     </ul>
 </nav>
 		<!--Jquery.min js-->
@@ -106,4 +127,17 @@
 		<!--Scripts js-->
 		<script src="${pageContext.request.contextPath}/js/scripts.js"></script>
 </body>
+<script>
+function exit(){
+	if(window.confirm("您真的要离开本宝宝吗？")){
+		$.ajax({
+		type:"post",
+		url:"${pageContext.request.contextPath}/front/login/exit.handler",
+		success:function(data){
+				window.location.href = "${pageContext.request.contextPath}/front/index.jsp";
+		}
+	})
+	}
+}
+</script>
 </html>
