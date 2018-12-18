@@ -28,7 +28,7 @@ public class CoachHandler {
 	@Resource
 	private CoachService coachService;
 	@Resource
-	private ParamMap paramMap;
+	private ParameterHandler parameterHandler;
 	/**查询教练列表
 	 * @param request
 	 * @return
@@ -36,10 +36,8 @@ public class CoachHandler {
 	 */
 	@RequestMapping(value = "/coachList.handler")
 	public String coachList(HttpServletRequest request) throws Exception {
-//		request.setAttribute("coachList",coachService.queryAll());
-//		request.setAttribute("param",paramMap.getMap("coach"));
 		ObjectMapper o= new ObjectMapper();
-		request.setAttribute("param", o.writeValueAsString(paramMap.getMap("coach")));
+		request.setAttribute("param", o.writeValueAsString(parameterHandler.getMap("coach")));
 		return "forward:/WEB-INF/back/coach_list.jsp";
 	}
 	@RequestMapping(value = "/getBySchool.handler")

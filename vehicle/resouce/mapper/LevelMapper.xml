@@ -7,4 +7,8 @@
     <result column="LEVEL_STATE" jdbcType="DECIMAL" property="levelState" />
     <result column="LEVEL_DATE" jdbcType="TIMESTAMP" property="levelDate" />
   </resultMap>
+  <!-- 查找全部 -->
+  <select id="queryAll" resultMap="BaseResultMap">
+  	select LEVEL_ID,LEVEL_NAME from t_level where LEVEL_STATE != 0
+  </select>
 </mapper>

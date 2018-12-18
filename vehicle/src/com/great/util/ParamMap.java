@@ -32,8 +32,8 @@ public class ParamMap {
 	/**
 	 * 重新加载参数
 	 */
-	public  Map reInit(String mark){
-		return initMap(mark);
+	public  void reInit(String mark){
+		map.put(mark, initMap(mark));
 	}
 	
 	/**

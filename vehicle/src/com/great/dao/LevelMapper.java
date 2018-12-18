@@ -1,17 +1,12 @@
 package com.great.dao;
 
-import com.great.bean.Level;
+import java.util.List;
+
 
 public interface LevelMapper {
-    int deleteByPrimaryKey(Integer levelId);
-
-    int insert(Level record);
-
-    int insertSelective(Level record);
-
-    Level selectByPrimaryKey(Integer levelId);
-
-    int updateByPrimaryKeySelective(Level record);
-
-    int updateByPrimaryKey(Level record);
+	/**查询所有科目
+	 * @return
+	 * @throws Exception
+	 */
+	public List queryAll() throws Exception;
 }

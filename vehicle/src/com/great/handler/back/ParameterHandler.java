@@ -1,5 +1,7 @@
 package com.great.handler.back;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,20 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.great.bean.Coach;
 import com.great.bean.Parameter;
-import com.great.service.CoachService;
 import com.great.service.ParameterService;
 import com.great.util.ParamMap;
 import com.great.util.Result;
-/**后台coach控制器
+/**后台parameter控制器
  * @author 
  *
  */
 @Controller("backParameter")
 @RequestMapping("/back/parameter")
 public class ParameterHandler {
+	//存放参数的对象
+	private Map map = new HashMap<>();
 	@Resource
 	private ParameterService parameterService;
 	/**参数列表
@@ -98,6 +99,7 @@ public class ParameterHandler {
 			@RequestBody Parameter parameter
 			) throws Exception {
 		if(parameterService.update(parameter)){
+			reInit(parameter.getParameterMark());
 			return Result.success(null);
 		}else{
 			return Result.fail();
@@ -117,5 +119,42 @@ public class ParameterHandler {
 		}else{
 			return Result.fail();
 		}
+	}
+	
+	
+	
+	/**获取参数表
+	 * @param mark
+	 * @return
+	 */
+	public  Map getMap(String mark) {
+		if(map.get(mark) == null){
+			map.put(mark, initMap(mark));
+		}
+		return (Map) map.get(mark);
+	}
+
+	/**
+	 * 重新加载参数
+	 */
+	public  void reInit(String mark){
+		map.put(mark, initMap(mark));
+	}
+	
+	/**
+	 *加载参数表至内存
+	 */
+	private Map initMap(String mark){
+		try {
+			List<Parameter> list = parameterService.queryAll(mark);
+			Map m = new HashMap<>();
+			for(Parameter p: list){
+				m.put(p.getParameterState(),p.getParameterName());
+			}
+			return m;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
