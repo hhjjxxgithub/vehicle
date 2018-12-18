@@ -334,7 +334,7 @@ background: linear-gradient(to right, #1a3784 0%,#34bab2 100%)
     border-bottom-left-radius: 5px;
     text-indent: 1em;
 }
-.tabCon input[type=button]{
+.tabCon button{
     height: 55px;
     width: 10%;
     background-color: #ff6b29;

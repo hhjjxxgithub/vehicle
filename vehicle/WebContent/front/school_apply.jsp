@@ -14,15 +14,15 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/base.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/valistyle.css">	
+	href="${pageContext.request.contextPath}/css/valistyle.css">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/index.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>驾校开通申请</title>
 <style>
-	#reg input{
-		width:40%;
-	}
+#reg input {
+	width: 40%;
+}
 </style>
 </head>
 <body>
@@ -43,49 +43,52 @@
 						<tr>
 							<td class="tdLable">驾校帐号</td>
 							<td><input type="text" class="caseInput"
-								name="schoolAccount" datatype="s1-5" errormsg="密码至少5个字符,最多10个字符！"/><br>
-							<span class="Validform_checktip"></span>								
-							</td>
-							<td class="tdLable" >驾校名称</td>
-							<td><input type="text" class="caseInput" name="schoolName"  datatype="s5-10" errormsg="密码至少5个字符,最多10个字符！" /><br>
-							<span class="Validform_checktip"></span>
-							</td>
+								name="schoolAccount" datatype="s1-5" errormsg="帐号至少1个字符,最多5个字符！"
+								ajaxurl='${pageContext.request.contextPath}/front/school/checkAccount.handler'
+								sucmsg="帐号可以使用！"/><br> <span
+								class="Validform_checktip"></span></td>
+							<td class="tdLable">驾校名称</td>
+							<td><input type="text" class="caseInput" name="schoolName"
+								datatype="s5-10" errormsg="名称至少5个字符,最多10个字符！"
+								ajaxurl='${pageContext.request.contextPath}/front/school/checkName.handler'
+								sucmsg="名称可以使用！" /><br> <span
+								class="Validform_checktip"></span></td>
 						</tr>
 						<tr>
 							<td class="tdLable">驾校密码</td>
-							<td>
-								<input type="password" class="caseInput" name="schoolPwd"  datatype="s5-10" errormsg="密码至少5个字符,最多10个字符！" /><br>
-								<span class="Validform_checktip"></span>
-							</td>
+							<td><input type="password" class="caseInput"
+								name="schoolPwd" datatype="s5-16" errormsg="密码至少5个字符,最多16个字符！" /><br>
+								<span class="Validform_checktip"></span></td>
 							<td class="tdLable">营业执照编码</td>
-							<td><input type="text" class="caseInput" name="schoolLicense" datatype="s5-10" errormsg="密码至少5个字符,最多10个字符！"/><br>
-							<span class="Validform_checktip"></span>
-							</td>
+							<td><input type="text" class="caseInput"
+								name="schoolLicense" datatype="s5-10"
+								errormsg="营业执照至少5个字符,最多10个字符！" 
+								ajaxurl='${pageContext.request.contextPath}/front/school/checkLicense.handler'
+								sucmsg="营业执照可以使用！"/><br> <span
+								class="Validform_checktip"></span></td>
 						</tr>
 						<tr>
 							<td class="tdLable">确认驾校密码</td>
-							<td>
-								<input type="password" class="caseInput"
-								name="schoolPwd2" datatype="s5-10" errormsg="保持两个密码一致" recheck='schoolPwd'/><br>
-								<span class="Validform_checktip" ></span>
-								</td>
+							<td><input type="password" class="caseInput"
+								name="schoolPwd2" datatype="s5-16" errormsg="保持两个密码一致"
+								recheck='schoolPwd' /><br> <span
+								class="Validform_checktip"></span></td>
 							<td class="tdLable">法人代表姓名</td>
-							<td><input type="text" class="caseInput" name="schoolMaster" datatype="s5-10" errormsg="密码至少5个字符,最多10个字符！"/><br>
-							<span class="Validform_checktip" ></span></td>
+							<td><input type="text" class="caseInput" name="schoolMaster"
+								datatype="s2-5" errormsg="姓名至少2个字符,最多5个字符！" /><br> <span
+								class="Validform_checktip"></span></td>
 						</tr>
 						<tr>
-						<td class="tdLable">驾校联系方式</td>
-						<td><input type="text" class="caseInput" name="schoolPhone" datatype="s5-10" errormsg="密码至少5个字符,最多10个字符！"/><br>
-						<span class="Validform_checktip" ></span>
-						</td>
-					</tr>
-					<!-- <tr>
-						<td class="tdLable">成立日期</td>
-						<td><input type="text" class="caseInput" /></td>
-						<td class="tdLable">学员人数</td>
-						<td><input type="text" class="caseInput" /></td>
-					</tr> -->
-						<!--  <tr><td class="tdLable">收费标准及依据</td><td colspan="3"><label>选项</label><input type="radio" class="caseRadio"/><label>选项</label><input type="radio" class="caseRadio"/></td></tr> -->
+							<td class="tdLable">驾校联系方式</td>
+							<td><input type="text" class="caseInput" name="schoolPhone"
+								datatype="s8-11" errormsg="联系方式至少8个字符,最多11个字符！" /><br> <span
+								class="Validform_checktip"></span></td>
+							<td class="tdLable">驾校简介</td>
+							<td><input type="text" class="caseInput"
+								name="schoolIntroduce" datatype="s15-50"
+								errormsg="驾校简介至少15个字符,最多50个字符！" /><br> <span
+								class="Validform_checktip"></span></td>
+						</tr>
 					</table>
 				</div>
 				<p class="casefoot">
@@ -110,29 +113,28 @@
 </body>
 <script>
 $("#reg").Validform({
-	tiptype:3,
-	ajaxPost:true,
-	beforeSubmit:function(curform){
-		$.ajax({
-			type:'post',
-			url : "${pageContext.request.contextPath}/front/school/addSchool.handler",
-			contentType: 'application/json',
-			data:JSON.stringify($("#reg").serializeJSON()),
-			success:function(data){
-				if(data != 'y'){
-						window.alert("申请成功");
-						window.history.back();
-				} else {
-						window.alert("申请失败");
-						}
-				    }
-				})
-			return false;
-		}
-	});
-	
-function back(){
-	window.history.back();
-}
+    tiptype: 3,
+    ajaxPost: true,
+    beforeSubmit: function (curform) {
+        $.ajax({
+            type: 'post',
+            url: "${pageContext.request.contextPath}/front/school/addSchool.handler",
+            contentType: 'application/json',
+            data: JSON.stringify($("#reg").serializeJSON()),
+            success: function (data) {
+                if (data != 'y') {
+                    window.alert("申请成功");
+                    window.history.back();
+                } else {
+                    window.alert("申请失败");
+                }
+            }
+        })
+        return false;
+    }
+});
+	function back() {
+		window.history.back();
+	}
 </script>
 </html>

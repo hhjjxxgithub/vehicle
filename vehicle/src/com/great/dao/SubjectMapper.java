@@ -1,17 +1,9 @@
 package com.great.dao;
 
-import com.great.bean.Subject;
+import java.util.List;
+import java.util.Map;
 
 public interface SubjectMapper {
-    int deleteByPrimaryKey(Integer subjectId);
-
-    int insert(Subject record);
-
-    int insertSelective(Subject record);
-
-    Subject selectByPrimaryKey(Integer subjectId);
-
-    int updateByPrimaryKeySelective(Subject record);
-
-    int updateByPrimaryKey(Subject record);
+	
+	public List<Map> subjectOne(int levelId) throws Exception;
 }

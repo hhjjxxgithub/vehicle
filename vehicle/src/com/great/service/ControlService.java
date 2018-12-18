@@ -13,6 +13,7 @@ import com.great.dao.ControlMapper;
 public class ControlService {
 	@Resource
 	private ControlMapper controlMapper;
+	
 	public Control login(Map<String, Object> map) throws Exception{
 		return controlMapper.login(map);
 	}
