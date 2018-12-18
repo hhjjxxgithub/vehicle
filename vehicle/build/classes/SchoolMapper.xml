@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.great.dao.SchoolMapper">
+	<resultMap id="BaseResultMap" type="com.great.bean.School">
+		<id column="SCHOOL_ID" jdbcType="DECIMAL" property="schoolId" />
+		<result column="SCHOOL_ACCOUNT" jdbcType="VARCHAR" property="schoolAccount" />
+		<result column="SCHOOL_PWD" jdbcType="VARCHAR" property="schoolPwd" />
+		<result column="SCHOOL_NAME" jdbcType="VARCHAR" property="schoolName" />
+		<result column="SCHOOL_STATE" jdbcType="DECIMAL" property="schoolState" />
+		<result column="SCHOOL_DATE" jdbcType="TIMESTAMP" property="schoolDate" />
+		<result column="SCHOOL_LICENSE" jdbcType="VARCHAR" property="schoolLicense" />
+		<result column="SCHOOL_MASTER" jdbcType="VARCHAR" property="schoolMaster" />
+		<result column="SCHOOL_PHONE" jdbcType="VARCHAR" property="schoolPhone" />
+		<result column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
+		<result column="SCHOOL_INTRODUCE" jdbcType="VARCHAR" property="schoolIntroduce" />
+	</resultMap>
+	<resultMap type="com.great.bean.Car" id="carMap">
+		<result column="SCHOOL_ID" jdbcType="DECIMAL" property="schoolId" />
+	</resultMap>
+
+	<!--驾校登录 -->
+	<select id="login" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select
+		SCHOOL_ID,SCHOOL_ACCOUNT,SCHOOL_PWD,SCHOOL_NAME,SCHOOL_STATE,SCHOOL_DATE,SCHOOL_LICENSE,SCHOOL_MASTER,SCHOOL_PHONE,ROLE_ID,SCHOOL_INTRODUCE
+		from T_SCHOOL where SCHOOL_ACCOUNT = #{account} and SCHOOL_PWD =
+		#{pwd} and SCHOOL_STATE!=0
+	</select>
+
+	<!--驾校申请 -->
+	<insert id="addSchool" parameterType="com.great.bean.School">
+		insert into t_school
+		(SCHOOL_ID,SCHOOL_ACCOUNT,SCHOOL_PWD,SCHOOL_NAME,SCHOOL_LICENSE,SCHOOL_MASTER,SCHOOL_PHONE,SCHOOL_INTRODUCE)
+		values
+		(seq_t_school.nextval,#{schoolAccount},#{schoolPwd},#{schoolName},#{schoolLicense},#{schoolMaster},#{schoolPhone},#{schoolIntroduce})
+	</insert>
+
+	<!--驾校列表：无限制条件 -->
+	<select id="schoolList" resultType="java.util.Map">
+		select
+		SCHOOL_ID,SCHOOL_ACCOUNT,SCHOOL_PWD,SCHOOL_NAME,SCHOOL_STATE,to_char(SCHOOL_DATE,'yyyy-mm-dd')
+		SCHOOL_DATE,SCHOOL_LICENSE,SCHOOL_MASTER,SCHOOL_PHONE,ROLE_ID,SCHOOL_INTRODUCE
+		from t_school where SCHOOL_STATE!=0
+	</select>
+
+	<!--驾校列表：已开通的驾校 -->
+	<select id="openingSchool" resultType="java.util.Map">
+		select
+		SCHOOL_ID,SCHOOL_ACCOUNT,SCHOOL_PWD,SCHOOL_NAME,SCHOOL_STATE,to_char(SCHOOL_DATE,'yyyy-mm-dd')
+		SCHOOL_DATE,SCHOOL_LICENSE,SCHOOL_MASTER,SCHOOL_PHONE,ROLE_ID,SCHOOL_INTRODUCE
+		from t_school
+		where SCHOOL_STATE>=2 and SCHOOL_STATE!=0 and SCHOOL_STATE!=99
+	</select>
+
+	<!--驾校列表：根据名称 -->
+	<select id="schoolListByName" resultType="java.util.Map">
+		select
+		SCHOOL_ID,SCHOOL_ACCOUNT,SCHOOL_PWD,SCHOOL_NAME,SCHOOL_STATE,to_char(SCHOOL_DATE,'yyyy-mm-dd')
+		SCHOOL_DATE,SCHOOL_LICENSE,SCHOOL_MASTER,SCHOOL_PHONE,ROLE_ID,SCHOOL_INTRODUCE,(select
+		count(0) from t_car c where s.SCHOOL_ID=c.SCHOOL_ID) as cnum,
+		(select
+		count(0) from t_user u where s.SCHOOL_ID=u.SCHOOL_ID) as unum from
+		t_school s where
+		SCHOOL_STATE = 2 and SCHOOL_STATE!=0 and SCHOOL_NAME like
+		'%${schoolName}%'
+	</select>
+
+	<!--校验帐号 -->
+	<select id="checkAccount" parameterType="com.great.bean.School"
+		resultType="int">
+		select count(0) from t_school where
+		SCHOOL_ACCOUNT=#{schoolAccount} and SCHOOL_STATE!=0
+	</select>
+
+	<!--校验名称 -->
+	<select id="checkName" parameterType="com.great.bean.School"
+		resultType="int">
+		select count(0) from t_school where
+		SCHOOL_NAME=#{schoolName} and SCHOOL_STATE!=0
+	</select>
+
+	<!--校验营业执照 -->
+	<select id="checkLicense" parameterType="com.great.bean.School"
+		resultType="int">
+		select count(0) from t_school where
+		SCHOOL_LICENSE=#{schoolLicense} and SCHOOL_STATE!=0
+	</select>
+
+	<!--修改状态 -->
+	<update id="updateState" parameterType="com.great.bean.School">
+		update t_school set
+		SCHOOL_STATE = #{schoolState} where SCHOOL_ID=#{schoolId}
+	</update>
+</mapper>

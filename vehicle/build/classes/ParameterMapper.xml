@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.great.dao.ParameterMapper">
+  <resultMap id="BaseResultMap" type="com.great.bean.Parameter">
+    <id column="PARAMETER_ID" jdbcType="DECIMAL" property="parameterId" />
+    <result column="PARAMETER_NAME" jdbcType="VARCHAR" property="parameterName" />
+    <result column="PARAMETER_STATE" jdbcType="DECIMAL" property="parameterState" />
+    <result column="PARAMETER_DATE" jdbcType="TIMESTAMP" property="parameterDate" />
+    <result column="PARAMETER_MARK" jdbcType="VARCHAR" property="parameterMark" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.great.dao.PeriodMapper">
+	<resultMap id="BaseResultMap" type="com.great.bean.Period">
+		<id column="PERIOD_ID" jdbcType="DECIMAL" property="periodId" />
+		<result column="LEVEL_ID" jdbcType="VARCHAR" property="levelId" />
+		<result column="USER_ID" jdbcType="DECIMAL" property="userId" />
+		<result column="PERIOD_STATE" jdbcType="DECIMAL" property="periodState" />
+		<result column="PERIOD_DATE" jdbcType="TIMESTAMP" property="periodDate" />
+		<result column="PERIOD_BEGIN" jdbcType="VARCHAR" property="periodBegin" />
+		<result column="PERIOD_END" jdbcType="VARCHAR" property="periodEnd" />
+		<result column="PERIOD_LENGTH" jdbcType="VARCHAR" property="periodLength" />
+	</resultMap>
+	<resultMap type="com.great.bean.User" id="userMap">
+		<result column="USER_ID" jdbcType="DECIMAL" property="userId" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+	</resultMap>
+	<resultMap type="com.great.bean.Level" id="levelMap">
+		<result column="LEVEL_ID" jdbcType="DECIMAL" property="levelId" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="levelName" />
+	</resultMap>
+	<resultMap type="com.great.bean.Coach" id="coachMap">
+		<result column="COACH_ID" jdbcType="DECIMAL" property="coachId" />
+		<result column="COACH_NAME" jdbcType="VARCHAR" property="coachName" />
+	</resultMap>
+	<resultMap type="com.great.bean.Exam" id="examMap">
+		<result column="EXAM_ID" jdbcType="DECIMAL" property="examId" />
+		<result column="EXAM_STATE" jdbcType="DECIMAL" property="examState" />
+	</resultMap>
+
+
+
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.great.dao.ScoreMapper">
+  <resultMap id="BaseResultMap" type="com.great.bean.Score">
+    <id column="SCORE_ID" jdbcType="DECIMAL" property="scoreId" />
+    <result column="LEVEL_ID" jdbcType="DECIMAL" property="levelId" />
+    <result column="USER_ID" jdbcType="DECIMAL" property="userId" />
+    <result column="SCORE_STATE" jdbcType="DECIMAL" property="scoreState" />
+    <result column="SCORE_DATE" jdbcType="TIMESTAMP" property="scoreDate" />
+  </resultMap>
+</mapper>

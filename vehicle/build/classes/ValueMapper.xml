@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.great.dao.ValueMapper">
+  <resultMap id="BaseResultMap" type="com.great.bean.Value">
+    <id column="VALUE_ID" jdbcType="DECIMAL" property="valueId" />
+    <result column="VALUE_FROM" jdbcType="DECIMAL" property="valueFrom" />
+    <result column="VALUE_TO" jdbcType="DECIMAL" property="valueTo" />
+    <result column="VALUE_STATE" jdbcType="DECIMAL" property="valueState" />
+    <result column="VALUE_DATE" jdbcType="TIMESTAMP" property="valueDate" />
+    <result column="VALUE_RESULT" jdbcType="VARCHAR" property="valueResult" />
+    <result column="LEVEL_ID" jdbcType="DECIMAL" property="levelId" />
+  </resultMap>
+</mapper>

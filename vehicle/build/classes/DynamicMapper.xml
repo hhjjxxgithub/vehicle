@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.great.dao.DynamicMapper">
+  <resultMap id="BaseResultMap" type="com.great.bean.Dynamic">
+    <id column="DYNAMIC_ID" jdbcType="DECIMAL" property="dynamicId" />
+    <result column="DYNAMIC_TITLE" jdbcType="VARCHAR" property="dynamicTitle" />
+    <result column="DYNAMIC_CONTENT" jdbcType="VARCHAR" property="dynamicContent" />
+    <result column="DYNAMIC_STATE" jdbcType="DECIMAL" property="dynamicState" />
+    <result column="DYNAMIC_DATE" jdbcType="TIMESTAMP" property="dynamicDate" />
+  </resultMap>
+  
+</mapper>

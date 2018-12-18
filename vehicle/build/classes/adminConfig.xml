@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<adminConfig>
+	<admins>
+		<admin name="admin" pwd="admin" ></admin>
+		<admin name="admin1" pwd="admin" ></admin>
+	</admins>
+</adminConfig>

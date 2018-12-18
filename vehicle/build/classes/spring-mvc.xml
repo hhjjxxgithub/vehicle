@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:c="http://www.springframework.org/schema/c"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+      
+      <context:component-scan base-package="com.great.handler"/>
+      <context:component-scan base-package="com.great.service"/>
+      <context:component-scan base-package="com.great.bean"/>
+     <mvc:annotation-driven>
+     </mvc:annotation-driven>
+     <mvc:interceptors>
+     	<mvc:interceptor>
+			<mvc:mapping path="/go/back/**"/>
+			<bean name="back" class="com.great.interceptor.BackGo"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/go/front/**"/>
+			<bean name="front" class="com.great.interceptor.FrontGo"></bean>
+		</mvc:interceptor>
+     </mvc:interceptors>
+      
+      <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      	<property name="prefix" value="/WEB-INF/"></property>
+      	<property name="suffix" value=".jsp"></property>
+      </bean>
+      
+      	<!-- 文件上传 -->
+	  <bean id="multipartResolver" 
+	    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	      <!-- 设置上传文件的格式 -->
+    	  <property name="defaultEncoding" value="UTF-8"></property>
+		  <!--  设置上传文件的最大尺寸为5MB --> 
+		  <property name="maxUploadSize">
+		      <value>5242880</value> 
+		  </property>
+	  </bean>
+      
+</beans>

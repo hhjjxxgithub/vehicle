@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.great.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.great.bean.Role">
+    <id column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="ROLE_STATE" jdbcType="DECIMAL" property="roleState" />
+    <result column="ROLE_DATE" jdbcType="TIMESTAMP" property="roleDate" />
+  </resultMap>
+</mapper>

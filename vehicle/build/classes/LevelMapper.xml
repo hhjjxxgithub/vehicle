@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.great.dao.LevelMapper">
+  <resultMap id="BaseResultMap" type="com.great.bean.Level">
+    <id column="LEVEL_ID" jdbcType="DECIMAL" property="levelId" />
+    <result column="LEVEL_NAME" jdbcType="VARCHAR" property="levelName" />
+    <result column="LEVEL_STATE" jdbcType="DECIMAL" property="levelState" />
+    <result column="LEVEL_DATE" jdbcType="TIMESTAMP" property="levelDate" />
+  </resultMap>
+</mapper>

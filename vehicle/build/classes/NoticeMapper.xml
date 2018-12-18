@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.great.dao.NoticeMapper">
+  <resultMap id="BaseResultMap" type="com.great.bean.Notice">
+    <id column="NOTICE_ID" jdbcType="DECIMAL" property="noticeId" />
+    <result column="NOTICE_TITLE" jdbcType="VARCHAR" property="noticeTitle" />
+    <result column="NOTICE_CONTENT" jdbcType="VARCHAR" property="noticeContent" />
+    <result column="NOTICE_STATE" jdbcType="DECIMAL" property="noticeState" />
+    <result column="NOTICE_DATE" jdbcType="TIMESTAMP" property="noticeDate" />
+  </resultMap>
+</mapper>

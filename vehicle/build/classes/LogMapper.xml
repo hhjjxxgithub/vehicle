@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.great.dao.LogMapper">
+  <resultMap id="BaseResultMap" type="com.great.bean.Log">
+    <id column="LOG_ID" jdbcType="DECIMAL" property="logId" />
+    <result column="LOG_STATE" jdbcType="DECIMAL" property="logState" />
+    <result column="LOG_EVENT" jdbcType="VARCHAR" property="logEvent" />
+    <result column="LOG_DATE" jdbcType="TIMESTAMP" property="logDate" />
+  </resultMap>
+</mapper>
