@@ -106,4 +106,7 @@
 		SUBJECT_OPTIOND_SCORE = 0 where SUBJECT_ID = #{subjectId}
 	</update>
 	
+  <select id="subjectOne" parameterType="int" resultType="map">
+  	select * from T_SUBJECT where LEVEL_ID = #{level_id}
+  </select>
 </mapper>

@@ -78,4 +78,8 @@ public class SubjectService {
 	public Subject getById(Integer subjectId) throws Exception{
 		return subjectMapper.getById(subjectId);
 	}
+	
+	public List<Map> subjectOne(int levelId) throws Exception{
+		return subjectMapper.subjectOne(levelId);
+	}
 }

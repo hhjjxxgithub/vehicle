@@ -15,4 +15,5 @@ public interface SubjectMapper {
 	public int reset (Integer subjectId) throws Exception;
 	public List queryAll() throws Exception;
 	public Subject getById(Integer subjectId) throws Exception;
+	public List<Map> subjectOne(int levelId) throws Exception;
 }
