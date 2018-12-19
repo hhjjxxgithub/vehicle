@@ -10,6 +10,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/body.css"/> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/valistyle.css">   
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>学员注册</title>
 </head>
@@ -21,18 +23,23 @@
 			<div>
 				<input type="text" placeholder="账号" required="" name="userAccount" id="userAccount" datatype="s1-10" errormsg="用户账号至少5个字符,最多10个字符!"
 				ajaxurl="${pageContext.request.contextPath}/front/user/checkAccount.handler" sucmsg="账号还未被使用，可以注册！"/>
+				<br><span class='Validform_checktip'></span>
 			</div>
 			<div>
 				<input type="text" placeholder="学员名称" required="" name="userName" id="userName" datatype="s1-10" errormsg="用户名至少5个字符,最多10个字符!"/>
+				<br><span class='Validform_checktip'></span>
 			</div>
 			<div>
 				<input type="password" placeholder="密码" required="" name="userPwd" id="userPwd" datatype="s5-10" errormsg="密码至少5个字符,最多10个字符！"/>
+				<br><span class='Validform_checktip'></span>
 			</div>
 			<div>
 				<input type="password" placeholder="确认密码" required="" name="newPwd" id="newPwd" datatype="s5-10" errormsg="保持两个密码一致" recheck='userPwd'/>
+				<br><span class='Validform_checktip'></span>
 			</div>
 			<div>
 				<input type="text" placeholder="手机号" required="" name="userPhone" id="userPhone" datatype="m" errormsg="请填写正确的手机号码！"/>
+				<br><span class='Validform_checktip'></span>
 			</div>
 		    <div class="">
 				<span class="help-block u-errormessage" id="js-server-helpinfo">&nbsp;</span>
@@ -47,7 +54,7 @@
 </body>
 <script>
 $("#reg").Validform({
-	tiptype:2,
+	tiptype:3,
 	ajaxPost:true,
 	beforeSubmit:function(curform){
 		$.ajax({

@@ -14,44 +14,52 @@
     <result column="USER_STATE" jdbcType="DECIMAL" property="userState" />
     <result column="USER_DATE" jdbcType="TIMESTAMP" property="userDate" />
     <result column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
-    <collection property="coachList" resultMap="coachMap"></collection>
-    <collection property="schoolList" resultMap="schoolMap"></collection>
   </resultMap>
-  <resultMap type="com.great.bean.Coach" id="coachMap">
-		<result property="coachId" column="COACH_ID"/>
-		<result property="coachName" column="COACH_NAME"/>
-  </resultMap>
-  <resultMap type="com.great.bean.School" id="schoolMap">
-		<result property="schoolId" column="SCHOOL_ID"/>
-		<result property="schoolName" column="SCHOOL_NAME"/>
-  </resultMap>
-	<select id="userList" parameterType="java.util.Map" resultMap="BaseResultMap" >
-		select C.COACH_NAME,S.SCHOOL_NAME,U.USER_ID,U.USER_ACCOUNT,U.USER_PWD,U.USER_NAME,U.USER_PHONE,U.USER_CARD,U.USER_LEVEL,U.COACH_ID,U.SCHOOL_ID,U.USER_STATE,U.USER_DATE,U.ROLE_ID
-		from T_USER U left join T_COACH C on U.COACH_ID=C.COACH_ID left join T_SCHOOL S on U.SCHOOL_ID=S.SCHOOL_ID
+  
+  
+    <!-- 后端学员管理 -->
+	<select id="userList" parameterType="java.util.Map" resultType="map" >
+		select U.PARAMETER_NAME,L.LEVEL_NAME,C.COACH_NAME,U.SCHOOL_NAME,U.USER_ID,U.USER_ACCOUNT,U.USER_PWD,U.USER_NAME,U.USER_PHONE,U.USER_CARD,U.USER_LEVEL,U.COACH_ID,U.SCHOOL_ID,U.USER_STATE,U.USER_DATE,U.ROLE_ID
+		from (select uu.*,p.PARAMETER_NAME,S.SCHOOL_NAME from t_user uu,T_SCHOOL s,T_PARAMETER p where uu.USER_STATE != 99 and uu.SCHOOL_ID=s.SCHOOL_ID and uu.USER_STATE = p.PARAMETER_ID
+		<if test="userId!=null and userId!=''">
+				and uu.USER_ID=#{userId}
+		</if>
+		) U left join T_COACH C on U.COACH_ID=C.COACH_ID  left join T_LEVEL L on U.USER_LEVEL=L.LEVEL_ID 
 	</select>
 	
-  
+    <!-- 前端学员登录 -->
   	<select id="login" parameterType="java.util.Map" resultMap="BaseResultMap">
 		select USER_ID,USER_ACCOUNT,USER_PWD,USER_NAME,USER_PHONE,USER_CARD,USER_LEVEL,COACH_ID,SCHOOL_ID,USER_STATE,USER_DATE,ROLE_ID
 		from T_USER where USER_ACCOUNT = #{account} and USER_PWD = #{pwd}
 	</select>
-	
+	<!-- 前端学员注册 -->
 	<insert id="userAdd" parameterType="com.great.bean.User">
 		insert into t_user(USER_ID,USER_ACCOUNT,USER_PWD,USER_NAME,USER_PHONE) 
 		values (seq_t_user.nextval,#{userAccount},#{userPwd},#{userName},#{userPhone})
 	</insert>
-	
+	<!-- 前端学员注册检测用户名 -->
 	<select id="checkAccount" parameterType="String" resultType="int">
 		 select count(0) from T_USER where USER_ACCOUNT = #{userAccount}
 	</select>
-	
+	<!-- 后端学员管理删除学员 -->
+	<!-- 前端学员报名审核分配教练 -->
 	<update id="deleteUser" parameterType="map">
 		update T_USER
 		<set>
 			<if test="userState!=null and userState!=''">
 				USER_STATE=#{userState}
 			</if>
+			<if test="coachId!=null and coachId!=''">
+				COACH_ID=#{coachId}
+			</if>
 		</set>
 		where USER_ID=#{userId}
 	</update>
+	
+	<!-- 前端报名审核列表 -->
+	<select id="userEnroll" parameterType="map" resultType="map">
+		select U.USER_ID,U.USER_NAME,U.USER_PHONE,U.USER_CARD,U.USER_DATE,U.SCHOOL_ID,U.COACH_ID,C.COACH_NAME from 
+		(select * from T_USER  where  SCHOOL_ID = #{schoolId} and USER_STATE = #{userState}) U left join T_COACH C 
+		on U.COACH_ID = C.COACH_ID 
+	</select>
 </mapper>

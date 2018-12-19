@@ -10,4 +10,6 @@
     <result column="VALUE_RESULT" jdbcType="VARCHAR" property="valueResult" />
     <result column="LEVEL_ID" jdbcType="DECIMAL" property="levelId" />
   </resultMap>
+  
+
 </mapper>

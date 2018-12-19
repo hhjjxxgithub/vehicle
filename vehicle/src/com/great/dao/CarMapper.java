@@ -1,17 +1,12 @@
 package com.great.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.great.bean.Car;
 
 public interface CarMapper {
-    int deleteByPrimaryKey(Integer carId);
-
-    int insert(Car record);
-
-    int insertSelective(Car record);
-
-    Car selectByPrimaryKey(Integer carId);
-
-    int updateByPrimaryKeySelective(Car record);
-
-    int updateByPrimaryKey(Car record);
+	public List<Map> carList(Map<String,Object> map) throws Exception;
+	public int deleteCar(Map<String,Object> map) throws Exception;
+	public int carAdd(Car car) throws Exception;
 }

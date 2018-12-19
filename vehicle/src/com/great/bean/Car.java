@@ -1,6 +1,7 @@
 package com.great.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Car {
     private Integer carId;
@@ -14,6 +15,7 @@ public class Car {
     private Integer schoolId;
 
     private Integer coachId;
+    
 
     public Integer getCarId() {
         return carId;
@@ -62,4 +64,7 @@ public class Car {
     public void setCoachId(Integer coachId) {
         this.coachId = coachId;
     }
+
+    
+    
 }

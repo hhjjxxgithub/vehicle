@@ -1,17 +1,9 @@
 package com.great.dao;
 
+import java.util.Map;
+
 import com.great.bean.Evaluate;
 
 public interface EvaluateMapper {
-    int deleteByPrimaryKey(Integer evaluateId);
-
-    int insert(Evaluate record);
-
-    int insertSelective(Evaluate record);
-
-    Evaluate selectByPrimaryKey(Integer evaluateId);
-
-    int updateByPrimaryKeySelective(Evaluate record);
-
-    int updateByPrimaryKey(Evaluate record);
+	public int addEvaluate(Map<String,Object> map) throws Exception;
 }

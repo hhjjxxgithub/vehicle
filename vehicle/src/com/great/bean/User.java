@@ -1,6 +1,7 @@
 package com.great.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private Integer userId;
@@ -122,4 +123,8 @@ public class User {
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
+
+    
+	
+    
 }

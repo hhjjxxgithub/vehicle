@@ -13,7 +13,7 @@
     <result column="SCHOOL_PHONE" jdbcType="VARCHAR" property="schoolPhone" />
     <result column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
   </resultMap>
-  
+  	<!--前端驾校登录 -->
    	<select id="login" parameterType="java.util.Map" resultMap="BaseResultMap">
 		select SCHOOL_ID,SCHOOL_ACCOUNT,SCHOOL_PWD,SCHOOL_NAME,SCHOOL_STATE,SCHOOL_DATE,SCHOOL_LICENSE,SCHOOL_MASTER,SCHOOL_PHONE,ROLE_ID
 		from T_SCHOOL where SCHOOL_ACCOUNT = #{account} and SCHOOL_PWD = #{pwd} 
@@ -25,4 +25,9 @@
 		values
 		(seq_t_school.nextval,#{schoolAccount},#{schoolPwd},#{schoolName},#{schoolLicense},#{schoolMaster},#{schoolPhone})
 	</insert>
+	<!--后端添加教练车驾校列表 -->
+   	<select id="schoolList" parameterType="java.util.Map" resultType="map">
+		select p.PARAMETER_NAME,s.SCHOOL_ID,s.SCHOOL_ACCOUNT,s.SCHOOL_PWD,s.SCHOOL_NAME,s.SCHOOL_STATE,s.SCHOOL_DATE,s.SCHOOL_LICENSE,s.SCHOOL_MASTER,s.SCHOOL_PHONE,s.ROLE_ID
+		from T_SCHOOL s, T_PARAMETER p where s.SCHOOL_STATE = p.PARAMETER_ID
+	</select>
 </mapper>

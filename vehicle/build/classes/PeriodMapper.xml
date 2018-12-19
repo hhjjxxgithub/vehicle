@@ -11,4 +11,11 @@
     <result column="PERIOD_END" jdbcType="VARCHAR" property="periodEnd" />
     <result column="PERIOD_LENGTH" jdbcType="VARCHAR" property="periodLength" />
   </resultMap>
+  
+  
+  
+   <!-- 后端学员管理查看学时 -->
+	<select id="userTime" parameterType="map" resultType="map" >
+		select P.PERIOD_LENGTH,L.LEVEL_NAME FROM T_PERIOD P ,T_LEVEL L WHERE P.LEVEL_ID=L.LEVEL_ID AND P.USER_ID=#{userId}
+	</select>
 </mapper>

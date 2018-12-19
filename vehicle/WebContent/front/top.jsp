@@ -60,13 +60,26 @@
     <ul class="left" id="navList"><li><a href="${pageContext.request.contextPath}/front/head.jsp" target="right">首页</a></li>
         <li><a href="###">个人菜单</a><div class="navCon">
             <ul class="navConUl">
-                <li><a href="###"><p><img src="${pageContext.request.contextPath}/img/perso_02.png"> </p>
-                    <p>户籍办理 </p></a>
+                <li>
+                	<a href="${pageContext.request.contextPath}/back/school/schoolList.handler" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png"> </p>
+                    <p>教练车查看 </p></a>
+                </li>
+                <li>
+                	<a href="${pageContext.request.contextPath}/front/coach/coachEvaluateOne.handler" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png" target="right"> </p>
+                    <p>教练评价 </p></a>
+                </li>
+                 <li>
+                	<a href="${pageContext.request.contextPath}/front/exam/examDetail.handler" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png" target="right"> </p>
+                    <p>考试情况 </p></a>
+                </li>
+                 <li>
+                	<a href="${pageContext.request.contextPath}/go/front/enroll_list.handler" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png" target="right"> </p>
+                    <p>学员报名审核 </p></a>
                 </li>
             </ul>
         </div>
         <li><a href="law.html">行业动态</a></li>
-        <li><a href="${pageContext.request.contextPath}/front/user_list.jsp" target="right">通知公告</a> </li>
+        <li><a href="#" target="right">通知公告</a> </li>
         <li><a href="${pageContext.request.contextPath}/front/school_apply.jsp" target="right">驾校开通申请</a> </li>
     </ul>
 </nav>

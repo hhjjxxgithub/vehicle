@@ -10,4 +10,9 @@
     <result column="EVALUATE_STATE" jdbcType="DECIMAL" property="evaluateState" />
     <result column="EVALUATE_DATE" jdbcType="TIMESTAMP" property="evaluateDate" />
   </resultMap>
+  
+  <insert id="addEvaluate" parameterType="map">
+  	insert into T_EVALUATE (EVALUATE_ID,COACH_ID,SCHOOL_ID,USER_ID,EVALUATE_CONTENT) 
+  	values (seq_t_evaluate.nextval,#{coachId},#{schoolId},#{userId},#{evaluateContent})
+  </insert>
 </mapper>

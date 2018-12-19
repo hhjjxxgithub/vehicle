@@ -1,6 +1,7 @@
 package com.great.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Period {
     private Integer periodId;
@@ -18,6 +19,7 @@ public class Period {
     private String periodEnd;
 
     private String periodLength;
+    
 
     public Integer getPeriodId() {
         return periodId;
@@ -82,4 +84,7 @@ public class Period {
     public void setPeriodLength(String periodLength) {
         this.periodLength = periodLength == null ? null : periodLength.trim();
     }
+
+    
+    
 }

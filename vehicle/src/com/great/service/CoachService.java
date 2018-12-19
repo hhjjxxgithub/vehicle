@@ -19,4 +19,7 @@ public class CoachService {
 	public List<Map> queryAll() throws Exception{
 		return coachMapper.queryAll();
 	}
+	public List<Map> coachList(Map<String,Object> map) throws Exception{
+		return coachMapper.coachList(map);
+	}
 }

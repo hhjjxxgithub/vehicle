@@ -8,4 +8,9 @@
     <result column="SCORE_STATE" jdbcType="DECIMAL" property="scoreState" />
     <result column="SCORE_DATE" jdbcType="TIMESTAMP" property="scoreDate" />
   </resultMap>
+  
+  <insert id="testResult" parameterType="map">
+  	insert into T_SCORE (SCORE_ID,LEVEL_ID,USER_ID,SCORE_STATE) select seq_t_score.nextval,#{levelId},#{userId},VALUE_ID from t_value where LEVEL_ID = #{levelId} 
+  	and #{score} &gt;= VALUE_FROM and #{score} &lt;= VALUE_TO ;
+  </insert>
 </mapper>

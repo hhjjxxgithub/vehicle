@@ -10,6 +10,12 @@ public class Exam {
     private Integer examState;
 
     private Date examDate;
+    
+    private Integer userId;
+    
+    private Integer coachId;
+    
+    private Integer schoolId;
 
     public Integer getExamId() {
         return examId;
@@ -42,4 +48,30 @@ public class Exam {
     public void setExamDate(Date examDate) {
         this.examDate = examDate;
     }
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public Integer getCoachId() {
+		return coachId;
+	}
+
+	public void setCoachId(Integer coachId) {
+		this.coachId = coachId;
+	}
+
+	public Integer getSchoolId() {
+		return schoolId;
+	}
+
+	public void setSchoolId(Integer schoolId) {
+		this.schoolId = schoolId;
+	}
+    
+    
 }

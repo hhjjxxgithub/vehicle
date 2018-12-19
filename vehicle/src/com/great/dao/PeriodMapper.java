@@ -1,17 +1,10 @@
 package com.great.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import com.great.bean.Period;
 
 public interface PeriodMapper {
-    int deleteByPrimaryKey(Integer periodId);
-
-    int insert(Period record);
-
-    int insertSelective(Period record);
-
-    Period selectByPrimaryKey(Integer periodId);
-
-    int updateByPrimaryKeySelective(Period record);
-
-    int updateByPrimaryKey(Period record);
+	public List<Map> userTime(Map<String,Object> map) throws Exception;
 }

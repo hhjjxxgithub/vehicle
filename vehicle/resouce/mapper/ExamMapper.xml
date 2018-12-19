@@ -6,5 +6,12 @@
     <result column="LEVEL_ID" jdbcType="DECIMAL" property="levelId" />
     <result column="EXAM_STATE" jdbcType="DECIMAL" property="examState" />
     <result column="EXAM_DATE" jdbcType="TIMESTAMP" property="examDate" />
+     <result column="USER_ID" jdbcType="DECIMAL" property="userId" />
+      <result column="COACH_ID" jdbcType="DECIMAL" property="coachId" />
+       <result column="SCHOOL_ID" jdbcType="DECIMAL" property="schoolId" />
   </resultMap>
+  
+  <select id="examList" parameterType="map" resultType="map">
+  	select L.LEVEL_NAME,E.EXAM_STATE,E.EXAM_DATE,E.EXAM_ID from T_LEVEL L,T_EXAM E WHERE E.USER_ID = #{userId} and E.LEVEL_ID = L.LEVEL_ID
+  </select>
 </mapper>

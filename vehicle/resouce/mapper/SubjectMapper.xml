@@ -16,4 +16,8 @@
     <result column="SUBJECT_TITLE" jdbcType="VARCHAR" property="subjectTitle" />
     <result column="LEVEL_ID" jdbcType="DECIMAL" property="levelId" />
   </resultMap>
+  
+  <select id="subjectOne" parameterType="int" resultType="map">
+  	select * from T_SUBJECT where LEVEL_ID = #{level_id}
+  </select>
 </mapper>

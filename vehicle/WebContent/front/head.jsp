@@ -8,6 +8,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>管理员登录</title>
+<style>
+.info{
+background-color: white;
+margin-left: 500px;
+}
+</style>
 </head>
 <body>	
 <div class="indexConPh left">
@@ -44,4 +50,10 @@
         </div>
     </div>
 </body>
+<script type="text/javascript" src="https://bot.4paradigm.com/web/assets/ics-web-sdk-js.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+IcsWebSdkJs.init('https://bot.4paradigm.com/web/chat/2754/67678401-f861-4080-b611-d95505cd1284')
+}
+</script>
 </html>

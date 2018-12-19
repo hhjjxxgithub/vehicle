@@ -18,9 +18,16 @@
   	COACH_PHONE,ROLE_ID from t_coach where COACH_ACCOUNT = #{account} and 
   	COACH_PWD = #{pwd} and COACH_STATE != 99
   </select>
+  
   <select id="queryAll" resultType="map">
   	select COACH_ID,COACH_ACCOUNT,COACH_NAME,SCHOOL_NAME,p.PARAMETER_NAME,COACH_CARD,
   	COACH_PHONE from t_coach c,t_school s,t_parameter p where c.COACH_STATE != 99 and 
   	c.COACH_STATE = p.PARAMETER_ID and c.SCHOOL_ID = s.SCHOOL_ID 
+  </select>
+  
+   <select id="coachList" parameterType="map" resultType="map">
+  	select COACH_ID,COACH_ACCOUNT,COACH_NAME,p.PARAMETER_NAME,COACH_CARD,
+  	COACH_PHONE from t_coach c,t_parameter p where c.COACH_STATE != 99 and 
+  	c.COACH_STATE = p.PARAMETER_ID and c.SCHOOL_ID =  #{schoolId}
   </select>
 </mapper>
