@@ -34,7 +34,8 @@
 <title>驾校查询</title>
 <style>
 .app-content{
-margin-right: 90px;
+	margin-right: 90px;
+	margin-top:-10px;
 }
 </style>
 </head>

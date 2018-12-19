@@ -44,21 +44,21 @@ ul{
 .headLeft{
     width: 30%;
     text-align: right;
-
-
-
 }
 .headLeft img{
     height: 60px;
     position: relative;
     top:25px;
-
-
+}
+.headLeft span{
+    position: relative;
+    top:8px;
+    color:#5c6287;
+    right:-3px;
 }
 .headCenter{
     width: 34%;
     padding-left: 3%;
-
 }
 .headCenter a{
     text-decoration: none;
@@ -216,11 +216,13 @@ background: linear-gradient(to right, #1a3784 0%,#34bab2 100%)
     display: inline-block;
     padding-left: 2%;
     padding-right: 2%;
+    margin-top:3px;
 }
 .nav ul li>a{
     text-decoration: none;
     color: #ffffff;
     font-weight: bold;
+    font-size:16px;
     display: inline-block;
 
 }

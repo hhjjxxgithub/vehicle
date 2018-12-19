@@ -74,4 +74,8 @@ public class MenuService {
 	public boolean delete (Integer menuId) throws Exception{
 		return menuMapper.delete(menuId) > 0;
 	}
+	
+	public List getFrontMenu(Integer menuId) throws Exception{
+		return menuMapper.getFrontMenu(menuId);
+	}
 }

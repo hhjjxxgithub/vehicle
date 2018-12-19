@@ -34,7 +34,8 @@
 <title>驾校违规处罚</title>
 <style>
 .app-content{
-margin-right: 90px;
+	margin-right: 90px;
+	margin-top:-10px;
 }
 </style>
 </head>

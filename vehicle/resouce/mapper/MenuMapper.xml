@@ -28,7 +28,13 @@
   	select MENU_ID,MENU_NAME,MENU_PARENT,MENU_LINK,MENU_STATE from t_menu where MENU_STATE != 0 and 
   	MENU_ID in (select distinct MENU_PARENT from t_menu m,t_role_menu rm where 
   	m.MENU_ID = rm.MENU_ID and ROLE_ID = #{roleId} and MENU_PARENT != 0) order by MENU_INDEX
-  </select> 
+  </select>
+   <!-- 前台菜单 -->
+  <select id="getFrontMenu" parameterType="Integer" resultMap="BaseResultMap">
+  	select MENU_NAME,MENU_LINK from t_menu m,t_role_menu rm where m.MENU_ID = rm.MENU_ID
+  	and ROLE_ID = #{roleId}
+  </select>
+   
     <!-- 查询所有一级菜单 -->
   <select id="getParent"  resultMap="BaseResultMap">
   	select MENU_ID,MENU_NAME from t_menu where MENU_PARENT = 0 and MENU_STATE != 0 and MENU_STATE != 2 

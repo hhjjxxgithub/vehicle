@@ -9,6 +9,7 @@ public interface MenuMapper {
 	public List getByRole(Integer roleId) throws Exception;
 	public List getParentByRole(Integer roleId) throws Exception;
 	public List getParent() throws Exception;
+	public List getFrontMenu(Integer menuId) throws Exception;
 	public Menu getById(Integer menuId) throws Exception;
 	public int add (Menu menu) throws Exception;
 	public int update (Menu menu) throws Exception;

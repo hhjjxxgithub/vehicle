@@ -34,7 +34,8 @@
 <title>驾校开通审核</title>
 <style>
 .app-content{
-margin-right: 90px;
+	margin-right: 90px;
+	margin-top:-10px;
 }
 </style>
 </head>

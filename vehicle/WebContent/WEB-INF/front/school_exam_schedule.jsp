@@ -34,7 +34,8 @@
 <title>学员考试安排</title>
 <style>
 .app-content{
-margin-right: 90px;
+	margin-right: 90px;
+	margin-top:-10px;
 }
 </style>
 </head>

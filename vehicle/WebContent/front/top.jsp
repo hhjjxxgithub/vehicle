@@ -21,9 +21,10 @@
 </head>
 <body>	
 <header class="headStyle">
-	<div class="left headLeft">
-       <img src="${pageContext.request.contextPath}/img/logo2.jpg" style="vertical-align:top"/>
-       <span style="font-size:15px">机动车驾驶员计时培训系统</span>
+	<div class="left headLeft" style="line-height:15px">
+       <img src="${pageContext.request.contextPath}/img/logo2.jpg" />
+		<br><br>
+       <span style="font-size:20px">机动车驾驶员培训平台</span>
     </div>
     <div class="right headRight">
         <ul>
@@ -38,15 +39,6 @@
 						<div class="d-sm-none d-lg-inline-block">Jessica Lee</div>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a href="profile.html" class="dropdown-item has-icon">
-							<i class="ion ion-android-person"></i> Profile
-						</a>
-						<a href="profile.html" class="dropdown-item has-icon">
-							<i class="ion-android-drafts"></i> Messages
-						</a>
-						<a href="profile.html" class="dropdown-item has-icon">
-							<i class="ion ion-gear-a"></i> Settings
-						</a>
 						<a class="dropdown-item has-icon" href="###" onclick="exit()">
 							<i class="ion-ios-redo"></i> 退出
 						</a>
@@ -58,32 +50,13 @@
 </header>
  <nav class="nav left">
     <ul class="left" id="navList"><li><a href="${pageContext.request.contextPath}/front/head.jsp" target="right">首页</a></li>
-        <c:if test="${sessionScope.login.roleId!=u}">
-        <li><a href="###">个人菜单</a><div class="navCon">
-            <ul class="navConUl">
-            <c:choose>
-           <c:when test="${sessionScope.login.roleId==2}">
-                <li><a href="${pageContext.request.contextPath}/front/school/examSchedule.handler" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png"> </p>
-                    <p>学员考试安排 </p></a>
-                </li>
-           </c:when>
-            <c:when test="${sessionScope.login.roleId==4}">
-                <li><a href="${pageContext.request.contextPath}/front/control/schoolList.handler" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png"> </p>
-                    <p>驾校开通审核 </p></a>
-                </li>
-                 <li><a href="${pageContext.request.contextPath}/front/control/schoolPunishList.handler" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png"> </p>
-                    <p>驾校违规处罚 </p></a>
-                </li>
-            </c:when>
-            <c:when test="${sessionScope.login.roleId==1}">
-            <li><a href="${pageContext.request.contextPath}/front/subject/subjectOne.handler?now=1" target="right"><p><img src="${pageContext.request.contextPath}/img/perso_02.png"> </p>
-                    <p>科目一学习 </p></a>
-                </li>
-            </c:when>
-            </c:choose>
+        <c:if test="${not empty sessionScope.login}">
+        <li><a href="###">菜单</a><div class="navCon">
+            <ul class="navConUl" id="ul">
+          
             </ul>
         </div>
-            </c:if>
+        </c:if>
         <li><a href="law.html">行业动态</a></li>
         <li><a href="${pageContext.request.contextPath}/front/user_list.jsp" target="right">通知公告</a> </li>
         <c:if test="${sessionScope.login.roleId!=4 && sessionScope.login.roleId!=1}">
@@ -128,6 +101,27 @@
 		<script src="${pageContext.request.contextPath}/js/scripts.js"></script>
 </body>
 <script>
+$(function(){
+	$.ajax({
+		type:"post",
+		url:"${pageContext.request.contextPath}/front/menu/getMenu.handler",
+		dataTyoe:"json",
+		success:function(data){
+				if(data.status == 'n'){
+					return;
+				}
+				var menu = "";
+				for(var i = 0;i< data.info.length;i++){
+					menu += "<li>"
+					+"<a href='${pageContext.request.contextPath}"+data.info[i].menuLink+"' target='right'>"
+					+"<p><img src='${pageContext.request.contextPath}/img/perso_02.png'></p>"
+                    +"<p>"+data.info[i].menuName+"</p></a>"
+                    +"</li>"					
+				}
+				$("#ul").html(menu);
+		}
+	})
+})
 function exit(){
 	if(window.confirm("您真的要离开本宝宝吗？")){
 		$.ajax({

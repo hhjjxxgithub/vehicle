@@ -80,7 +80,7 @@
 				$.ajax({
 					type:'post',
 					url:path+"/back/menu/getMenu.handler",
-					data:{roleId:1},
+					data:{roleId:5},
 					dataType:'json',
 					success:function(data){
 						/* 一级菜单 */						
@@ -99,7 +99,26 @@
 						}
 					}
 				})
-			})				
+			})
+			/* iframe 自动适应 */
+			function calcPageHeight(doc) {
+			    var cHeight = Math.max(doc.body.clientHeight, doc.documentElement.clientHeight);
+			    var sHeight = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+			    var height  = Math.max(cHeight, sHeight);
+			    return height;
+			}
+				//根据ID获取iframe对象
+				var ifr = document.getElementById('iframe');
+				ifr.onload = function() {
+				  //解决打开高度太高的页面后再打开高度较小页面滚动条不收缩
+				ifr.style.height='0px';
+			    var iDoc = ifr.contentDocument || ifr.document;
+			    var height = calcPageHeight(iDoc);
+			    if(height < 850){
+			    	height = 850;
+			    }
+			    ifr.style.height = height + 'px';
+			 }
 		</script>
 </body>
 
